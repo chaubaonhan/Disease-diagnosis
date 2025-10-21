@@ -106,7 +106,7 @@ if not os.path.exists(npz_path):
     st.info("Đang tải file data.npz từ Hugging Face...")
     try:
         npz_path = hf_hub_download(
-            repo_id="username/repo_name",  # Thay bằng repo của bạn
+            repo_id="BaoNhan/PTL-XB",  # Thay bằng repo của bạn
             filename="data.npz",
             use_auth_token=True            # Nếu repo private, login token
         )
@@ -119,14 +119,10 @@ try:
     data = np.load(npz_path, allow_pickle=True)
 except Exception as e:
     st.error(f"Lỗi khi đọc file npz: {e}")
+    st.stop()
 
 
 
-npz_path = "data.npz"
-data = np.load(npz_path, allow_pickle=True)
-
-# Kiểm tra các key trong file
-print("Keys trong file npz:", data.keys())
 
 X_train = data['X_train']
 Y_train = data['Y_train']
