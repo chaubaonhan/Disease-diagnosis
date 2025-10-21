@@ -95,9 +95,27 @@ def load_keras_models():
     return loaded_models
 
 st.header("Thực hiện dự đoán")
-NUMPY_DATA_FILE = 'D:\Demo\data.npz'
+# Đường dẫn local file
+npz_path = "data.npz"
 
-data = np.load(NUMPY_DATA_FILE, allow_pickle=True)
+# Link Hugging Face
+url = "https://huggingface.co/username/my-data/resolve/main/data.npz"
+
+# Nếu chưa có file thì tải xuống
+import os
+import requests
+if not os.path.exists(npz_path):
+    st.info("Đang tải file data.npz từ Hugging Face, vui lòng chờ...")
+    with requests.get(url, stream=True) as r:
+        r.raise_for_status()
+        with open(npz_path, "wb") as f:
+            for chunk in r.iter_content(chunk_size=8192):
+                f.write(chunk)
+    st.success("Tải xong file data.npz!")
+
+# Load dữ liệu từ file vừa tải
+import numpy as np
+data = np.load(npz_path, allow_pickle=True)
 
 X_train = data['X_train']
 Y_train = data['Y_train']
@@ -321,3 +339,4 @@ if predict_disease_button:
                 plt.close(fig) # Đóng figure để giải phóng bộ nhớ
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
