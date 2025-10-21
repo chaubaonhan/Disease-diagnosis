@@ -98,8 +98,6 @@ st.header("Thực hiện dự đoán")
 from huggingface_hub import hf_hub_download
 
 
-st.header("Thực hiện dự đoán")
-
 # Tải file nếu chưa có
 npz_path = "data.npz"
 if not os.path.exists(npz_path):
@@ -114,17 +112,7 @@ if not os.path.exists(npz_path):
     except Exception as e:
         st.error(f"Lỗi tải file từ Hugging Face: {e}")
 
-# Load dữ liệu
-try:
-    data = np.load(npz_path, allow_pickle=True)
-except Exception as e:
-    st.error(f"Lỗi khi đọc file npz: {e}")
-    st.stop()
 
-
-import os
-
-npz_path = "data.npz"
 print("Dung lượng file:", os.path.getsize(npz_path))
 
 with open(npz_path, "rb") as f:
@@ -354,6 +342,7 @@ if predict_disease_button:
                 plt.close(fig) # Đóng figure để giải phóng bộ nhớ
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
 
