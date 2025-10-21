@@ -95,30 +95,9 @@ def load_keras_models():
     return loaded_models
 
 st.header("Thực hiện dự đoán")
-NUMPY_DATA_FILE = 'data.npz' # Sẽ lưu file ở cùng thư mục với script .py
+NUMPY_DATA_FILE = 'D:\Demo\database\data.npz'
 
-# 2. Link Google Drive của bạn
-drive_url = "https://drive.google.com/file/d/1DgaQNuSAVCLT9hxu9byT2FQ7wunNd5zj/view?usp=sharing"
-
-# 3. Kiểm tra xem file đã tồn tại chưa, nếu chưa thì tải về
-if not os.path.exists(NUMPY_DATA_FILE):
-    print(f"Đang tải {NUMPY_DATA_FILE} từ Google Drive...")
-    try:
-        # Tải file từ Google Drive và lưu vào đường dẫn NUMPY_DATA_FILE
-        gdown.download(drive_url, NUMPY_DATA_FILE, quiet=False)
-        print("Tải file thành công!")
-    except Exception as e:
-        print(f"Lỗi khi tải file: {e}")
-        # Bạn có thể thêm xử lý lỗi ở đây, ví dụ: exit()
-
-# 4. Tải dữ liệu từ file npz (dù là vừa tải về hay đã có sẵn)
-try:
-    data = np.load(NUMPY_DATA_FILE, allow_pickle=True)
-    print("Đọc file .npz thành công!")
-
-except Exception as e:
-    print(f"Lỗi khi đọc file {NUMPY_DATA_FILE}: {e}")
-
+data = np.load(NUMPY_DATA_FILE, allow_pickle=True)
 
 X_train = data['X_train']
 Y_train = data['Y_train']
@@ -342,6 +321,7 @@ if predict_disease_button:
                 plt.close(fig) # Đóng figure để giải phóng bộ nhớ
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
 
