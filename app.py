@@ -99,7 +99,7 @@ st.header("Thực hiện dự đoán")
 npz_path = "data.npz"
 
 # Link Hugging Face
-url = "https://huggingface.co/username/my-data/resolve/main/data.npz"
+url = "https://huggingface.co/datasets/BaoNhan/PTL-XB/blob/main/data.npz"
 
 # Nếu chưa có file thì tải xuống
 import os
@@ -339,4 +339,5 @@ if predict_disease_button:
                 plt.close(fig) # Đóng figure để giải phóng bộ nhớ
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
