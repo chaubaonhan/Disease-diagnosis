@@ -117,7 +117,8 @@ print("Dung lượng file:", os.path.getsize(data))
 
 with open(data, "rb") as f:
     head = f.read(10)
-print("Đầu file:", head)
+    print("Đầu file sau khi tải:", head)
+
 
 
 X_train = data['X_train']
@@ -342,6 +343,7 @@ if predict_disease_button:
                 plt.close(fig) # Đóng figure để giải phóng bộ nhớ
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
 
