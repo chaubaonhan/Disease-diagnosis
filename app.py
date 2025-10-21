@@ -95,27 +95,33 @@ def load_keras_models():
     return loaded_models
 
 st.header("Thực hiện dự đoán")
-# Đường dẫn local file
-npz_path = "data.npz"
-
-# Link Hugging Face
-url = "https://huggingface.co/datasets/BaoNhan/PTL-XB/blob/main/data.npz"
-
-# Nếu chưa có file thì tải xuống
-import os
-import requests
-if not os.path.exists(npz_path):
-    st.info("Đang tải file data.npz từ Hugging Face, vui lòng chờ...")
-    with requests.get(url, stream=True) as r:
-        r.raise_for_status()
-        with open(npz_path, "wb") as f:
-            for chunk in r.iter_content(chunk_size=8192):
-                f.write(chunk)
-    st.success("Tải xong file data.npz!")
-
-# Load dữ liệu từ file vừa tải
+from huggingface_hub import hf_hub_download
 import numpy as np
-data = np.load(npz_path, allow_pickle=True)
+import streamlit as st
+
+st.header("Thực hiện dự đoán")
+
+# Tải file nếu chưa có
+npz_path = "data.npz"
+if not os.path.exists(npz_path):
+    st.info("Đang tải file data.npz từ Hugging Face...")
+    try:
+        npz_path = hf_hub_download(
+            repo_id="username/repo_name",  # Thay bằng repo của bạn
+            filename="data.npz",
+            use_auth_token=True            # Nếu repo private, login token
+        )
+        st.success("Tải xong file data.npz!")
+    except Exception as e:
+        st.error(f"Lỗi tải file từ Hugging Face: {e}")
+
+# Load dữ liệu
+try:
+    data = np.load(npz_path, allow_pickle=True)
+except Exception as e:
+    st.error(f"Lỗi khi đọc file npz: {e}")
+
+
 
 X_train = data['X_train']
 Y_train = data['Y_train']
@@ -339,5 +345,6 @@ if predict_disease_button:
                 plt.close(fig) # Đóng figure để giải phóng bộ nhớ
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
