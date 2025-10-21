@@ -71,8 +71,15 @@ python -m venv .venv
 # 4. Cài đặt các thư viện cần thiết từ file requirements.txt
 pip install -r requirements.txt
 ```
+### 4. Đánh giá các mô hình
 
-### 3. Chạy ứng dụng
+| Tên mô hình | Độ chính xác | Kiến trúc |
+| :--- | :--- | :--- |
+| Model 1 | 90% | [3 Conv2D + 3 Maxpooling](path/to/cnn_model.py) |
+| Model 2 | 96% | EfficientNetB3 + 1 Dense |
+| Model 3 | 93% | VGG16 + 1 Dense |
+
+### 5. Chạy ứng dụng
 
 Sau khi cài đặt thành công, chạy lệnh sau trong terminal (với môi trường ảo đã được kích hoạt):
 
@@ -104,5 +111,6 @@ Cuối cùng là dự đoán của 3 mô hình
 <img width="1460" height="905" alt="00b86c8e857b59cb4c6e7e9598272294934a35304c8d637b1a9f454c" src="https://github.com/user-attachments/assets/5f35d07b-304d-4226-b4f2-0a5bc25bc9c9" />
 
 
-### 5. Thông tin về Database PTL-XB 
+### 6. Thông tin về Database PTL-XB 
 https://drive.google.com/drive/folders/1RoHQ5ZOElYm378oMAqw7R-3PzroYV6qP?usp=sharing
+
