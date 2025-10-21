@@ -122,6 +122,14 @@ except Exception as e:
     st.stop()
 
 
+import os
+
+npz_path = "data.npz"
+print("Dung lượng file:", os.path.getsize(npz_path))
+
+with open(npz_path, "rb") as f:
+    head = f.read(10)
+print("Đầu file:", head)
 
 
 X_train = data['X_train']
@@ -346,6 +354,7 @@ if predict_disease_button:
                 plt.close(fig) # Đóng figure để giải phóng bộ nhớ
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
 
