@@ -3,4 +3,5 @@ pandas
 numpy
 tensorflow
 matplotlib
+gdown
 pydot
