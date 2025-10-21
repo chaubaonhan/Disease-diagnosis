@@ -99,11 +99,11 @@ from huggingface_hub import hf_hub_download
 
 
 # Tải file nếu chưa có
-npz_path = "data.npz"
+data = "data.npz"
 if not os.path.exists(npz_path):
     st.info("Đang tải file data.npz từ Hugging Face...")
     try:
-        npz_path = hf_hub_download(
+        data = hf_hub_download(
             repo_id="BaoNhan/PTL-XB",  # Thay bằng repo của bạn
             filename="data.npz",
             use_auth_token=True            # Nếu repo private, login token
@@ -115,7 +115,7 @@ if not os.path.exists(npz_path):
 
 print("Dung lượng file:", os.path.getsize(npz_path))
 
-with open(npz_path, "rb") as f:
+with open(data, "rb") as f:
     head = f.read(10)
 print("Đầu file:", head)
 
@@ -342,6 +342,7 @@ if predict_disease_button:
                 plt.close(fig) # Đóng figure để giải phóng bộ nhớ
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
 
