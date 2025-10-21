@@ -75,7 +75,7 @@ pip install -r requirements.txt
 
 | Tên mô hình | Độ chính xác | Kiến trúc |
 | :--- | :--- | :--- |
-| Model 1 | 81% | [3 Conv2D + 3 Maxpooling]([path/to/cnn_model.py](https://github.com/chaubaonhan/Disease-diagnosis/blob/main/model01_architecture.png)) |
+| Model 1 | 81% | [3 Conv2D + 3 Maxpooling](model03_architecture.png) |
 | Model 2 | 90% | [EfficientNetB3 + 1 Dense](https://github.com/chaubaonhan/Disease-diagnosis/blob/main/model02_architecture.png) |
 | Model 3 | 89.6% | [VGG16 + 1 Dense](https://github.com/chaubaonhan/Disease-diagnosis/blob/main/model03_architecture.png) |
 
@@ -113,5 +113,6 @@ Cuối cùng là dự đoán của 3 mô hình
 
 ### 6. Thông tin về Database PTL-XB 
 https://drive.google.com/drive/folders/1RoHQ5ZOElYm378oMAqw7R-3PzroYV6qP?usp=sharing
+
 
 
