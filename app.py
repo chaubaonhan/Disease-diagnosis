@@ -96,8 +96,7 @@ def load_keras_models():
 
 st.header("Thực hiện dự đoán")
 from huggingface_hub import hf_hub_download
-import numpy as np
-import streamlit as st
+
 
 st.header("Thực hiện dự đoán")
 
@@ -122,6 +121,12 @@ except Exception as e:
     st.error(f"Lỗi khi đọc file npz: {e}")
 
 
+
+npz_path = "data.npz"
+data = np.load(npz_path, allow_pickle=True)
+
+# Kiểm tra các key trong file
+print("Keys trong file npz:", data.keys())
 
 X_train = data['X_train']
 Y_train = data['Y_train']
@@ -345,6 +350,7 @@ if predict_disease_button:
                 plt.close(fig) # Đóng figure để giải phóng bộ nhớ
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
 
