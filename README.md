@@ -1,7 +1,7 @@
 # 🫀 Demo Dự đoán Bệnh tim
 
 Đây là một ứng dụng web được xây dựng bằng Streamlit để demo khả năng dự đoán các bệnh lý tim mạch dựa trên dữ liệu điện tâm đồ (ECG) từ bộ dữ liệu PTB-XL.
-Các mô hình Machine Learning đã được tối ưu hóa, huấn luyện trên bộ dữ liệu PTB-XL.
+Các mô hình 1D Convolution Neural Network đã được tối ưu hóa, huấn luyện trên bộ dữ liệu PTB-XL.
 
 ## Tính năng
 
@@ -104,3 +104,5 @@ Cuối cùng là dự đoán của 3 mô hình
 <img width="1460" height="905" alt="00b86c8e857b59cb4c6e7e9598272294934a35304c8d637b1a9f454c" src="https://github.com/user-attachments/assets/5f35d07b-304d-4226-b4f2-0a5bc25bc9c9" />
 
 
+### 5. Thông tin về Database PTL-XB 
+https://drive.google.com/drive/folders/1RoHQ5ZOElYm378oMAqw7R-3PzroYV6qP?usp=sharing
