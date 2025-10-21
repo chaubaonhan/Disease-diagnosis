@@ -71,7 +71,7 @@ python -m venv .venv
 # 4. Cài đặt các thư viện cần thiết từ file requirements.txt
 pip install -r requirements.txt
 ```
-### 4. Đánh giá các mô hình
+### 3. Đánh giá các mô hình
 
 | Tên mô hình | Độ chính xác | Kiến trúc |
 | :--- | :--- | :--- |
@@ -79,7 +79,7 @@ pip install -r requirements.txt
 | Model 2 | 90% | [CNN 1D (3 Conv) + MLP (2 Dense) + 3 Dense (1000 steps)](https://github.com/chaubaonhan/Disease-diagnosis/blob/main/model02_architecture.png) |
 | Model 3 | 89.6% | [CNN 1D (3 Conv) + MLP (2 Dense) + 3 Dense (800 step)](https://github.com/chaubaonhan/Disease-diagnosis/blob/main/model03_architecture.png) |
 
-### 5. Chạy ứng dụng
+### 4. Chạy ứng dụng
 
 Sau khi cài đặt thành công, chạy lệnh sau trong terminal (với môi trường ảo đã được kích hoạt):
 
@@ -89,7 +89,7 @@ streamlit run app.py
 
 Ứng dụng sẽ mở trong trình duyệt web của bạn.
 
-### 4. Giao diện web 
+### 5. Giao diện web 
 
 Phần đầu sẽ tả về database đó là thông tin bệnh nhân
 
@@ -113,6 +113,7 @@ Cuối cùng là dự đoán của 3 mô hình
 
 ### 6. Thông tin về Database PTL-XB 
 https://drive.google.com/drive/folders/1RoHQ5ZOElYm378oMAqw7R-3PzroYV6qP?usp=sharing
+
 
 
 
