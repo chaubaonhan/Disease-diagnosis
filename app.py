@@ -100,7 +100,7 @@ from huggingface_hub import hf_hub_download
 
 # Tải file nếu chưa có
 data = "data.npz"
-if not os.path.exists(npz_path):
+if not os.path.exists(data):
     st.info("Đang tải file data.npz từ Hugging Face...")
     try:
         data = hf_hub_download(
@@ -113,7 +113,7 @@ if not os.path.exists(npz_path):
         st.error(f"Lỗi tải file từ Hugging Face: {e}")
 
 
-print("Dung lượng file:", os.path.getsize(npz_path))
+print("Dung lượng file:", os.path.getsize(data))
 
 with open(data, "rb") as f:
     head = f.read(10)
@@ -342,6 +342,7 @@ if predict_disease_button:
                 plt.close(fig) # Đóng figure để giải phóng bộ nhớ
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
 
