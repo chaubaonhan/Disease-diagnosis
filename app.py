@@ -8,7 +8,7 @@ import numpy as np
 import tensorflow as tf # Thêm cho Keras models
 import matplotlib.pyplot as plt # Thêm cho vẽ biểu đồ
 import ast
-
+import gdown
 def set_page_style():
     """
     Hàm này chèn CSS để thay đổi màu nền và một số kiểu khác.
@@ -95,38 +95,29 @@ def load_keras_models():
     return loaded_models
 
 st.header("Thực hiện dự đoán")
-from huggingface_hub import hf_hub_download
+NUMPY_DATA_FILE = 'data.npz' # Sẽ lưu file ở cùng thư mục với script .py
 
+# 2. Link Google Drive của bạn
+drive_url = "https://drive.google.com/file/d/1DgaQNuSAVCLT9hxu9byT2FQ7wunNd5zj/view?usp=sharing"
 
-# Đường dẫn file
-npz_path = "data.npz"
-
-# Kiểm tra và tải file nếu chưa có
-if not os.path.exists(npz_path):
-    st.info("Đang tải file data.npz từ Hugging Face...")
+# 3. Kiểm tra xem file đã tồn tại chưa, nếu chưa thì tải về
+if not os.path.exists(NUMPY_DATA_FILE):
+    print(f"Đang tải {NUMPY_DATA_FILE} từ Google Drive...")
     try:
-        npz_path = hf_hub_download(
-            repo_id="BaoNhan/PTL-XB",  # Thay bằng repo của bạn
-            filename="data.npz",
-            use_auth_token=True            # Nếu repo private, login token
-        )
-        st.success("Tải xong file data.npz!")
+        # Tải file từ Google Drive và lưu vào đường dẫn NUMPY_DATA_FILE
+        gdown.download(drive_url, NUMPY_DATA_FILE, quiet=False)
+        print("Tải file thành công!")
     except Exception as e:
-        st.error(f"Lỗi tải file từ Hugging Face: {e}")
+        print(f"Lỗi khi tải file: {e}")
+        # Bạn có thể thêm xử lý lỗi ở đây, ví dụ: exit()
 
-# Kiểm tra nội dung file
-print("Dung lượng file:", os.path.getsize(npz_path))
-with open(npz_path, "rb") as f:
-    head = f.read(10)
-    print("Đầu file sau khi tải:", head)
-
-# Kiểm tra nội dung file npz
+# 4. Tải dữ liệu từ file npz (dù là vừa tải về hay đã có sẵn)
 try:
-    data = np.load(npz_path, allow_pickle=True)
-    print("Các keys trong file:", data.files)
-except Exception as e:
-    st.error(f"Lỗi khi đọc file npz: {e}")
+    data = np.load(NUMPY_DATA_FILE, allow_pickle=True)
+    print("Đọc file .npz thành công!")
 
+except Exception as e:
+    print(f"Lỗi khi đọc file {NUMPY_DATA_FILE}: {e}")
 
 
 X_train = data['X_train']
@@ -351,6 +342,7 @@ if predict_disease_button:
                 plt.close(fig) # Đóng figure để giải phóng bộ nhớ
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
 
