@@ -5,3 +5,5 @@ tensorflow
 matplotlib
 gdown
 pydot
+huggingface_hub
+
