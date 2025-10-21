@@ -98,12 +98,14 @@ st.header("Thực hiện dự đoán")
 from huggingface_hub import hf_hub_download
 
 
-# Tải file nếu chưa có
-data = "data.npz"
-if not os.path.exists(data):
+# Đường dẫn file
+npz_path = "data.npz"
+
+# Kiểm tra và tải file nếu chưa có
+if not os.path.exists(npz_path):
     st.info("Đang tải file data.npz từ Hugging Face...")
     try:
-        data = hf_hub_download(
+        npz_path = hf_hub_download(
             repo_id="BaoNhan/PTL-XB",  # Thay bằng repo của bạn
             filename="data.npz",
             use_auth_token=True            # Nếu repo private, login token
@@ -112,12 +114,18 @@ if not os.path.exists(data):
     except Exception as e:
         st.error(f"Lỗi tải file từ Hugging Face: {e}")
 
-
-print("Dung lượng file:", os.path.getsize(data))
-
-with open(data, "rb") as f:
+# Kiểm tra nội dung file
+print("Dung lượng file:", os.path.getsize(npz_path))
+with open(npz_path, "rb") as f:
     head = f.read(10)
     print("Đầu file sau khi tải:", head)
+
+# Kiểm tra nội dung file npz
+try:
+    data = np.load(npz_path, allow_pickle=True)
+    print("Các keys trong file:", data.files)
+except Exception as e:
+    st.error(f"Lỗi khi đọc file npz: {e}")
 
 
 
@@ -343,6 +351,7 @@ if predict_disease_button:
                 plt.close(fig) # Đóng figure để giải phóng bộ nhớ
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
 
