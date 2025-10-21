@@ -81,3 +81,26 @@ streamlit run app.py
 ```
 
 Ứng dụng sẽ mở trong trình duyệt web của bạn.
+
+### 4. Giao diện web 
+
+Phần đầu sẽ tả về database đó là thông tin bệnh nhân
+
+<img width="1260" height="381" alt="image" src="https://github.com/user-attachments/assets/19c446ae-88a5-4f43-b57b-35e053cb6c75" />
+
+Dữ liệu về nhãn bệnh
+
+<img width="1262" height="380" alt="image" src="https://github.com/user-attachments/assets/6398c82b-0ff2-49dd-9971-576c3c1f63b0" />
+
+Hình ảnh về ECG của bệnh nhân 
+
+<img width="1249" height="292" alt="image" src="https://github.com/user-attachments/assets/ef372468-2c27-4644-8623-3682d0207711" />
+
+Có chức năng thể hiện số không nhất thiết phải vẽ 
+
+
+Cuối cùng là dự đoán của 3 mô hình 
+
+<img width="1460" height="905" alt="00b86c8e857b59cb4c6e7e9598272294934a35304c8d637b1a9f454c" src="https://github.com/user-attachments/assets/5f35d07b-304d-4226-b4f2-0a5bc25bc9c9" />
+
+
