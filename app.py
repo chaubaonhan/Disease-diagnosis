@@ -266,7 +266,7 @@ if plot_ecg_button:
         # Nếu định dạng là (1000, 12), chuyển vị thành (12, 1000)
         if ecg_signal.ndim == 2 and ecg_signal.shape[1] == 12:
             ecg_signal = ecg_signal.T
-            st.info(f"Đã chuyển vị và điều chỉnh định dạng thành: `{ecg_signal.shape}`")
+            
 
         # --- Vẽ biểu đồ sau khi đã chuẩn hóa định dạng ---
         # Kiểm tra lại định dạng cuối cùng có phải là (12, N) hay không
@@ -397,6 +397,7 @@ if predict_disease_button:
                 )
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
 
