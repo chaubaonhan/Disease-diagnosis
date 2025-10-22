@@ -238,7 +238,7 @@ if plot_ecg_button:
         try:
             ecg_signal = np.load(specific_file_path)
             source_info = f"từ file `{specific_file_path}`"
-            st.success(f"Đã tải tín hiệu ECG {source_info}.")
+            
         except Exception as e:
             st.error(f"Lỗi khi tải file ECG `{specific_file_path}`: {e}. Thử tải từ X_test.")
             ecg_signal = None # Reset signal if loading failed
@@ -249,19 +249,19 @@ if plot_ecg_button:
         if numpy_idx_for_selected_ecg is not None:
             ecg_signal = X_test[numpy_idx_for_selected_ecg]
             source_info = "từ tập dữ liệu X_test"
-            st.success(f"Đã tải tín hiệu ECG {source_info}.")
+            
         else:
             st.error("Không tìm thấy dữ liệu ECG trong X_test cho bệnh nhân này.")
 
     # 3. Hiển thị tín hiệu ECG nếu đã tải thành công
     if ecg_signal is not None:
         # --- Xử lý định dạng tín hiệu ECG ---
-        st.write(f"Định dạng dữ liệu gốc {source_info}: `{ecg_signal.shape}`")
+       
         
         # Nếu là 3D array (ví dụ: (1, 12, 1000)), loại bỏ chiều không cần thiết
         if ecg_signal.ndim == 3 and ecg_signal.shape[0] == 1:
             ecg_signal = ecg_signal.squeeze(0)
-            st.info(f"Đã điều chỉnh định dạng thành: `{ecg_signal.shape}`")
+            
 
         # Nếu định dạng là (1000, 12), chuyển vị thành (12, 1000)
         if ecg_signal.ndim == 2 and ecg_signal.shape[1] == 12:
@@ -397,6 +397,7 @@ if predict_disease_button:
                 )
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
 
