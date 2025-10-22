@@ -45,7 +45,7 @@ Dự đoán nguy cơ mắc bệnh tim từ dữ liệu bệnh nhân với các m
 # --- PHẦN XỬ LÝ VÀ HIỂN THỊ DỮ LIỆU ---
 
 # Định nghĩa đường dẫn đến các file CSV
-db_file = 'Disease-diagnosis\database\ptbxl_database.csv'
+db_file = 'https://github.com/chaubaonhan/Disease-diagnosis/blob/main/database/ptbxl_database.csv'
 scp_file = 'D:\Demo\database\scp_statements.csv'
 
 # 1. Hiển thị dữ liệu từ ptbxl_database.csv
@@ -355,5 +355,6 @@ if predict_disease_button:
                 )
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
