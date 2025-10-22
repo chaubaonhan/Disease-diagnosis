@@ -97,7 +97,7 @@ def load_keras_models():
     return loaded_models
 
 st.header("Thực hiện dự đoán")
-NUMPY_DATA_FILE = 'D:\Demo\database\data.npz'
+NUMPY_DATA_FILE = 'database/data.npz'
 
 data = np.load(NUMPY_DATA_FILE, allow_pickle=True)
 
@@ -355,6 +355,7 @@ if predict_disease_button:
                 )
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
 
