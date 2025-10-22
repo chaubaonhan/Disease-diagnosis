@@ -84,7 +84,7 @@ pip install -r requirements.txt
 
 | Tên mô hình | Độ chính xác | Kiến trúc |
 | :--- | :--- | :--- |
-| Model 1 | 81% | [MLP (5 Lớp Dense)]([model01_architecture.png](https://github.com/chaubaonhan/Disease-diagnosis/blob/main/model/model01_architecture.png)) |
+| Model 1 | 81% | [MLP (5 Lớp Dense)](https://github.com/chaubaonhan/Disease-diagnosis/blob/main/model/model01_architecture.png) |
 | Model 2 | 90% | [CNN 1D (3 Conv) + MLP (2 Dense) + 3 Dense (1000 steps)](https://github.com/chaubaonhan/Disease-diagnosis/blob/main/model/model02_architecture.png) |
 | Model 3 | 89.6% | [CNN 1D (3 Conv) + MLP (2 Dense) + 3 Dense (800 step)](https://github.com/chaubaonhan/Disease-diagnosis/blob/main/model/model03_architecture.png) |
 
@@ -126,6 +126,7 @@ Cuối cùng là dự đoán của 3 mô hình
 
 ### 6. Thông tin về Database PTL-XB 
 https://drive.google.com/drive/folders/1RoHQ5ZOElYm378oMAqw7R-3PzroYV6qP?usp=sharing
+
 
 
 
