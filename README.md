@@ -13,31 +13,32 @@ Các mô hình 1D Convolution Neural Network đã được tối ưu hóa, huấ
 
 ## Cấu trúc thư mục
 
-.devcontainer/
-    └── devcontainer.json
-database/
-    ├── data.npz
-    ├── merge.csv
-    ├── ptbxl_database.csv
-    └── scp_statements.csv
-experiment/
-    └── Heart_diagnosis.ipynb
-model/
-    ├── model01_architecture.png
-    ├── model01.keras
-    ├── model02_architecture.png
-    ├── model02.keras
-    ├── model03_architecture.png
-    └── model03.keras
-test/
-    ├── demo_ecg_76.npy
-    ├── demo_ecg_8733.npy
-    ├── prediction_ecg_76.json
-    └── prediction_ecg_8733.json
-.gitattributes
-app.py
-README.md
-requirements.txt
+📁 .devcontainer/
+│   └── 📄 devcontainer.json        # Cấu hình môi trường phát triển tự động trong VS Code Dev Containers (Docker)
+📁 database/
+│   ├── 📄 data.npz                 # Dữ liệu đã được xử lý và nén (numpy array, thường là train/test/valid splits)
+│   ├── 📄 merge.csv                # File tổng hợp thông tin bệnh nhân sau khi merge nhiều nguồn dữ liệu
+│   ├── 📄 ptbxl_database.csv       # CSDL chính từ PTB-XL (thông tin metadata: tuổi, giới, nhãn ECG, v.v.)
+│   └── 📄 scp_statements.csv       # Bảng ánh xạ giữa nhãn SCP và loại bệnh tim (NORM, MI, STTC, CD, HYP)
+📁 experiment/
+│   └── 📄 Heart_diagnosis.ipynb    # Notebook dùng để huấn luyện, đánh giá và trực quan hóa mô hình chẩn đoán ECG
+📁 model/
+│   ├── 📄 model01_architecture.png # Sơ đồ kiến trúc mô hình 01 (ví dụ CNN 1D hoặc LSTM)
+│   ├── 📄 model01.keras            # Trọng số mô hình 01 đã được huấn luyện (định dạng Keras)
+│   ├── 📄 model02_architecture.png # Sơ đồ kiến trúc mô hình 02 (ví dụ mô hình kết hợp meta + ECG)
+│   ├── 📄 model02.keras            # Trọng số mô hình 02 đã huấn luyện
+│   ├── 📄 model03_architecture.png # Sơ đồ kiến trúc mô hình 03 (phiên bản thử nghiệm hoặc cải tiến)
+│   └── 📄 model03.keras            # Trọng số mô hình 03
+📁 test/
+│   ├── 📄 demo_ecg_76.npy          # Dữ liệu ECG mẫu (id = 76) dùng cho demo/predict
+│   ├── 📄 demo_ecg_8733.npy        # Dữ liệu ECG mẫu khác (id = 8733)
+│   ├── 📄 prediction_ecg_76.json   # Kết quả dự đoán của mô hình cho demo_ecg_76
+│   └── 📄 prediction_ecg_8733.json # Kết quả dự đoán của mô hình cho demo_ecg_8733
+📄 .gitattributes                   # Thiết lập thuộc tính Git (ví dụ: xử lý dòng, LFS, text/binary)
+📄 app.py                           # Ứng dụng Streamlit hiển thị giao diện chẩn đoán ECG và kết quả dự đoán
+📄 README.md                        # Tài liệu mô tả dự án (giới thiệu, hướng dẫn cài đặt, demo, v.v.)
+📄 requirements.txt                 # Danh sách thư viện Python cần cài đặt để chạy dự án
+
 ## Hướng dẫn Cài đặt và Chạy
 
 ### 1. Yêu cầu cài đặt
