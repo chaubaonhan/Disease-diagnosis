@@ -49,31 +49,65 @@ db_file = 'database/ptbxl_database.csv'
 scp_file = 'database/scp_statements.csv'
 
 # 1. Hiển thị dữ liệu từ ptbxl_database.csv
-st.header(f"Dữ liệu từ `{db_file}`")
+st.header("🩺 Dữ liệu bệnh nhân từ hệ thống")
+
 if os.path.exists(db_file):
     try:
-        # Đọc file CSV
-        # Đổi tên file merge.csv thành ptbxl_database.csv nếu cần
         df_db = pd.read_csv(db_file, index_col=0)
-        # Hiển thị 10 dòng đầu tiên
-        st.dataframe(df_db.head(10))
+
+        # Thanh tìm kiếm Patient ID
+        search_patient = st.text_input(
+            "🔍 Tìm bệnh nhân theo ID",
+            placeholder="Enter patient ID (ví dụ: 10000)"
+        )
+
+        if search_patient:
+                if search_patient.isdigit():
+                    result_db = df_db[df_db['patient_id'] == int(search_patient)]
+                    if not result_db.empty:
+                        st.success(f"✅ Tìm thấy {len(result_db)} dòng cho bệnh nhân ID {search_patient}")
+                        st.dataframe(result_db, use_container_width=True)
+                    else:
+                        st.warning(f"⚠️ Không tìm thấy bệnh nhân có ID {search_patient}")
+                else:
+                    st.warning("⚠️ Vui lòng nhập số hợp lệ cho patient ID.")
+        else:
+            st.dataframe(df_db, use_container_width=True)
     except Exception as e:
         st.error(f"Lỗi khi đọc file {db_file}: {e}")
 else:
-    st.warning(f"Không tìm thấy file `{db_file}`. Vui lòng đặt file vào cùng thư mục với `app.py`.")
+    st.warning(f"⚠️ Không tìm thấy file `{db_file}`. Vui lòng đặt file vào cùng thư mục với `app.py`.")
 
-# 2. Hiển thị dữ liệu từ scp_statements.csv
-st.header(f"Dữ liệu từ `{scp_file}`")
+
+# 2️⃣ HIỂN THỊ DỮ LIỆU CÁC LOẠI BỆNH
+st.header("🧬 Dữ liệu các loại bệnh cần tìm từ hệ thống")
+
 if os.path.exists(scp_file):
     try:
-        # Đọc file CSV
         df_scp = pd.read_csv(scp_file, index_col=0)
-        # Hiển thị 10 dòng đầu tiên
-        st.dataframe(df_scp.head(10))
+
+        # Thanh tìm kiếm tên bệnh
+        search_disease = st.text_input(
+            "🔍 Tìm loại bệnh theo tên",
+            placeholder="Enter disease name (ví dụ: NORM, MI, STTC)"
+        )
+
+        if search_disease:
+            # Lọc không phân biệt hoa thường
+            result_scp = df_scp[df_scp.index.str.contains(search_disease, case=False, na=False)]
+
+            if not result_scp.empty:
+                st.success(f"✅ Tìm thấy {len(result_scp)} kết quả khớp với '{search_disease}'")
+                st.dataframe(result_scp, use_container_width=True)
+            else:
+                st.warning("⚠️ Không tìm thấy bệnh nào phù hợp!")
+        else:
+            st.dataframe(df_scp, use_container_width=True)
+
     except Exception as e:
         st.error(f"Lỗi khi đọc file {scp_file}: {e}")
 else:
-    st.warning(f"Không tìm thấy file `{scp_file}`. Vui lòng đặt file vào cùng thư mục với `app.py`.")
+    st.warning(f"⚠️ Không tìm thấy file `{scp_file}`. Vui lòng đặt file vào cùng thư mục với `app.py`.")
 
 # --- Model Loading ---
 # Sử dụng st.cache_resource để tải mô hình chỉ một lần
@@ -167,7 +201,15 @@ with pred_col1:
     
     # Hiển thị dữ liệu của bệnh nhân đã chọn
     st.write("Thông tin bệnh nhân:")
-    st.json(patient_data)
+    def clean_value1(val, key=None):
+        if pd.isna(val) or val == "unknown":
+            return "Không rõ"
+        elif val is None:
+            return "Không có"
+        else:
+            return val
+    cleaned_data = {k: clean_value1(v, k) for k, v in patient_data.items()}
+    st.json(cleaned_data)
 
 with pred_col2:
     st.write("") # Thêm khoảng trống
@@ -355,6 +397,7 @@ if predict_disease_button:
                 )
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
 
