@@ -39,7 +39,7 @@ Các mô hình 1D Convolution Neural Network đã được tối ưu hóa, huấ
 📄 README.md                        # Tài liệu mô tả dự án (giới thiệu, hướng dẫn cài đặt, demo, v.v.)
 📄 requirements.txt                 # Danh sách thư viện Python cần cài đặt để chạy dự án
 ```
-<a href="https://githubtree.mgks.dev/repo/chaubaonhan/Disease-diagnosis/main/" target="_blank">.</a>
+<a href="https://githubtree.mgks.dev/repo/chaubaonhan/Disease-diagnosis/main/" target="_blank">Hướng dẫn cách tạo cấu trúc thư mục</a>
 
 ## Hướng dẫn Cài đặt và Chạy
 
@@ -125,6 +125,7 @@ Cuối cùng là dự đoán của 3 mô hình
 
 ### 6. Thông tin về Database PTL-XB 
 https://drive.google.com/drive/folders/1RoHQ5ZOElYm378oMAqw7R-3PzroYV6qP?usp=sharing
+
 
 
 
