@@ -12,7 +12,7 @@ Các mô hình 1D Convolution Neural Network đã được tối ưu hóa, huấ
 -   **So sánh mô hình**: Trực quan hóa kết quả dự đoán của các mô hình trên một biểu đồ cột để dễ dàng so sánh.
 
 ## Cấu trúc thư mục
-
+```markdown
 📁 .devcontainer/
 │   └── 📄 devcontainer.json        # Cấu hình môi trường phát triển tự động trong VS Code Dev Containers (Docker)
 📁 database/
@@ -38,6 +38,8 @@ Các mô hình 1D Convolution Neural Network đã được tối ưu hóa, huấ
 📄 app.py                           # Ứng dụng Streamlit hiển thị giao diện chẩn đoán ECG và kết quả dự đoán
 📄 README.md                        # Tài liệu mô tả dự án (giới thiệu, hướng dẫn cài đặt, demo, v.v.)
 📄 requirements.txt                 # Danh sách thư viện Python cần cài đặt để chạy dự án
+```
+<a href="https://github.com/chaubaonhan/ptbxl-heart-diagnosis" target="_blank">.</a>
 
 ## Hướng dẫn Cài đặt và Chạy
 
@@ -123,6 +125,7 @@ Cuối cùng là dự đoán của 3 mô hình
 
 ### 6. Thông tin về Database PTL-XB 
 https://drive.google.com/drive/folders/1RoHQ5ZOElYm378oMAqw7R-3PzroYV6qP?usp=sharing
+
 
 
 
