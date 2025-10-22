@@ -102,11 +102,11 @@ streamlit run app.py
 
 Phần đầu sẽ tả về database đó là thông tin bệnh nhân
 
-<img width="1260" height="381" alt="image" src="https://github.com/user-attachments/assets/19c446ae-88a5-4f43-b57b-35e053cb6c75" />
+<img width="1209" height="407" alt="image" src="https://github.com/user-attachments/assets/e0dda135-1c7a-4a05-b420-a01e2b859770" />
 
 Dữ liệu về nhãn bệnh
 
-<img width="1262" height="380" alt="image" src="https://github.com/user-attachments/assets/6398c82b-0ff2-49dd-9971-576c3c1f63b0" />
+<img width="1253" height="457" alt="image" src="https://github.com/user-attachments/assets/f5a719db-4978-4179-aea3-77a604ce8fd9" />
 
 Hình ảnh về ECG của bệnh nhân 
 
@@ -126,6 +126,7 @@ Cuối cùng là dự đoán của 3 mô hình
 
 ### 6. Thông tin về Database PTL-XB 
 https://drive.google.com/drive/folders/1RoHQ5ZOElYm378oMAqw7R-3PzroYV6qP?usp=sharing
+
 
 
 
