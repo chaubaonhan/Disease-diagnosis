@@ -112,7 +112,7 @@ Z_valid = data['Z_valid']
 X_test = data['X_test']
 Y_test = data['Y_test']
 Z_test = data['Z_test']
-ECG_df = pd.read_csv('D:\Demo\database\ptbxl_database.csv', index_col='ecg_id')
+ECG_df = pd.read_csv('database/ptbxl_database.csv', index_col='ecg_id')
 
 # Load models at the start
 models = load_keras_models()
@@ -145,8 +145,8 @@ ecg_id_to_demo_numpy_idx = {ecg_id: original_idx for ecg_id, original_idx in zip
 
 # Định nghĩa đường dẫn đến các file tín hiệu ECG cụ thể mà người dùng đã cung cấp
 # VUI LÒNG ĐẢM BẢO CÁC FILE NÀY TỒN TẠI TẠI ĐƯỜNG DẪN ĐƯỢC CHỈ ĐỊNH.
-DEMO_ECG_FILE_1 = r'D:\Demo\test\demo_ecg_76.npy'
-DEMO_ECG_FILE_2 = r'D:\Demo\test\demo_ecg_8733.npy'
+DEMO_ECG_FILE_1 = r'test/demo_ecg_76.npy'
+DEMO_ECG_FILE_2 = r'test/demo_ecg_8733.npy'
 
 ecg_id_to_specific_file = {
     demo_full.index[0]: DEMO_ECG_FILE_1,
@@ -355,6 +355,7 @@ if predict_disease_button:
                 )
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
 
