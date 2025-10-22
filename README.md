@@ -122,9 +122,11 @@ Cuối cùng là dự đoán của 3 mô hình
 
 <img width="1460" height="905" alt="00b86c8e857b59cb4c6e7e9598272294934a35304c8d637b1a9f454c" src="https://github.com/user-attachments/assets/5f35d07b-304d-4226-b4f2-0a5bc25bc9c9" />
 
+[Mô phỏng chuẩn đoán của bác sĩ](https://disease-diagnosis-kqfcwdbwukt6jd2jsvrv97.streamlit.app/)
 
 ### 6. Thông tin về Database PTL-XB 
 https://drive.google.com/drive/folders/1RoHQ5ZOElYm378oMAqw7R-3PzroYV6qP?usp=sharing
+
 
 
 
