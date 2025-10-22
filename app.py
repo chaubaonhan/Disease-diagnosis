@@ -8,7 +8,9 @@ import numpy as np
 import tensorflow as tf # Thêm cho Keras models
 import matplotlib.pyplot as plt # Thêm cho vẽ biểu đồ
 import ast
-import gdown
+import json
+import io
+
 def set_page_style():
     """
     Hàm này chèn CSS để thay đổi màu nền và một số kiểu khác.
@@ -43,8 +45,8 @@ Dự đoán nguy cơ mắc bệnh tim từ dữ liệu bệnh nhân với các m
 # --- PHẦN XỬ LÝ VÀ HIỂN THỊ DỮ LIỆU ---
 
 # Định nghĩa đường dẫn đến các file CSV
-db_file = 'ptbxl_database.csv'
-scp_file = 'scp_statements.csv'
+db_file = 'D:\Demo\database\ptbxl_database.csv'
+scp_file = 'D:\Demo\database\scp_statements.csv'
 
 # 1. Hiển thị dữ liệu từ ptbxl_database.csv
 st.header(f"Dữ liệu từ `{db_file}`")
@@ -78,9 +80,9 @@ else:
 @st.cache_resource
 def load_keras_models():
     model_paths = {
-        "model01": r'D:\Demo\model01.keras',
-        "model02": r'D:\Demo\model02.keras',
-        "model03": r'D:\Demo\model03.keras'
+        "model01": r'D:\Demo\model\model01.keras',
+        "model02": r'D:\Demo\model\model02.keras',
+        "model03": r'D:\Demo\model\model03.keras'
     }
     loaded_models = {}
     for name, path in model_paths.items():
@@ -110,7 +112,7 @@ Z_valid = data['Z_valid']
 X_test = data['X_test']
 Y_test = data['Y_test']
 Z_test = data['Z_test']
-ECG_df = pd.read_csv('ptbxl_database.csv', index_col='ecg_id')
+ECG_df = pd.read_csv('D:\Demo\database\ptbxl_database.csv', index_col='ecg_id')
 
 # Load models at the start
 models = load_keras_models()
@@ -143,8 +145,8 @@ ecg_id_to_demo_numpy_idx = {ecg_id: original_idx for ecg_id, original_idx in zip
 
 # Định nghĩa đường dẫn đến các file tín hiệu ECG cụ thể mà người dùng đã cung cấp
 # VUI LÒNG ĐẢM BẢO CÁC FILE NÀY TỒN TẠI TẠI ĐƯỜNG DẪN ĐƯỢC CHỈ ĐỊNH.
-DEMO_ECG_FILE_1 = r'D:\Demo\demo_ecg_76.npy'
-DEMO_ECG_FILE_2 = r'D:\Demo\demo_ecg_8733.npy'
+DEMO_ECG_FILE_1 = r'D:\Demo\test\demo_ecg_76.npy'
+DEMO_ECG_FILE_2 = r'D:\Demo\test\demo_ecg_8733.npy'
 
 ecg_id_to_specific_file = {
     demo_full.index[0]: DEMO_ECG_FILE_1,
@@ -231,9 +233,28 @@ if plot_ecg_button:
             # Transpose để mỗi cột là một đạo trình, mỗi hàng là một thời điểm
             ecg_df_plot = pd.DataFrame(ecg_signal.T, columns=[f'Lead {i+1}' for i in range(ecg_signal.shape[0])])
             st.line_chart(ecg_df_plot)
+        
         else:
             st.warning(f"Không thể vẽ biểu đồ. Định dạng tín hiệu ECG cuối cùng (`{ecg_signal.shape}`) không phù hợp (cần có 12 đạo trình).")
             st.write("Dữ liệu thô:", ecg_signal)
+        # Nút xuất file
+        output_file_path = f"demo_{selected_ecg_id}_ecg.npy"
+    
+    # Sử dụng st.download_button để người dùng click là tải file về
+        try:
+            # Chuyển dữ liệu ECG sang bytes
+            ecg_bytes = io.BytesIO()
+            np.save(ecg_bytes, ecg_signal)
+            ecg_bytes.seek(0)  # quay về đầu file để đọc
+
+            st.download_button(
+                label=f"Tải tín hiệu ECG (demo_{selected_ecg_id}_ecg.npy)",
+                data=ecg_bytes,
+                file_name=f"demo_{selected_ecg_id}_ecg.npy",
+                mime="application/octet-stream"
+            )
+        except Exception as e:
+            st.error(f"Lỗi khi chuẩn bị file tải xuống: {e}")
     else:
         st.error("Không thể tải tín hiệu ECG cho bệnh nhân này từ bất kỳ nguồn nào.")
 
@@ -254,22 +275,15 @@ if predict_disease_button:
             st.error(f"Không tìm thấy dữ liệu cho ecg_id {selected_ecg_id} trong tập test để dự đoán.")
         else:
             # Chuẩn bị dữ liệu đầu vào cho các mô hình
-            # X_test[original_idx_in_test_set] là dữ liệu tabular (shape 7,)
-            # Y_test[original_idx_in_test_set] là dữ liệu ECG (shape 1000, 12)
-            X_demo = X_test[original_idx_in_test_set][np.newaxis, :]  # shape (1, 7)
-            Y_demo = Y_test[original_idx_in_test_set][np.newaxis, :]  # shape (1, 1000, 12)
-            
-            # Lấy nhãn thật (ground truth) nếu có
-            true_labels_one_hot = Z_test[original_idx_in_test_set] # shape (5,)
-            true_labels_dict = {label: f"{val*100:.2f}%" for label, val in zip(labels, true_labels_one_hot)}
-            st.write("Nhãn thật của bệnh nhân:", true_labels_dict)
+            X_demo = X_test[original_idx_in_test_set][np.newaxis, :]
+            Y_demo = Y_test[original_idx_in_test_set][np.newaxis, :]
 
             predictions = {}
-            
+
             # Dự đoán với model01 (Tabular)
             if "model01" in models:
                 try:
-                    pred01 = models["model01"].predict(X_demo, verbose=0) # verbose=0 để ẩn output predict
+                    pred01 = models["model01"].predict(X_demo, verbose=0)
                     predictions["Model01 (Tabular)"] = pred01[0] * 100
                 except Exception as e:
                     st.error(f"Lỗi khi dự đoán với Model01: {e}")
@@ -285,30 +299,23 @@ if predict_disease_button:
             # Dự đoán với model03 (ECG)
             if "model03" in models:
                 try:
-                    # Model03 sử dụng 800 mẫu đầu tiên của tín hiệu ECG
-                    pred03 = models["model03"].predict([X_demo,Y_demo[:, :800, :]], verbose=0)
+                    pred03 = models["model03"].predict([X_demo, Y_demo[:, :800, :]], verbose=0)
                     predictions["Model03 (Tabular+ECG expand)"] = pred03[0] * 100
                 except Exception as e:
                     st.error(f"Lỗi khi dự đoán với Model03: {e}")
 
             if predictions:
                 st.subheader("Kết quả dự đoán từ các mô hình")
-                
-                # Tạo biểu đồ cột
+
+                # Vẽ biểu đồ cột
                 fig, ax = plt.subplots(figsize=(10, 6))
-                
                 x = np.arange(len(labels))
                 width = 0.25
-                
                 model_names = list(predictions.keys())
                 num_models = len(model_names)
-                
-                # Điều chỉnh vị trí các cột động
                 bar_positions = [x + (i - (num_models - 1) / 2) * width for i in range(num_models)]
-
                 for i, model_name in enumerate(model_names):
                     ax.bar(bar_positions[i], predictions[model_name], width, label=model_name)
-
                 ax.set_ylabel('Xác suất (%)')
                 ax.set_title(f'Dự đoán bệnh lý cho bệnh nhân (ecg_id: {selected_ecg_id})')
                 ax.set_xticks(x)
@@ -316,20 +323,35 @@ if predict_disease_button:
                 ax.legend()
                 ax.set_ylim(0, 100)
                 ax.grid(axis='y', linestyle='--', alpha=0.7)
-                
                 st.pyplot(fig)
-                plt.close(fig) # Đóng figure để giải phóng bộ nhớ
+                plt.close(fig)
+
+                # --- Chuẩn hóa patient_data: NaN → "Không rõ", None → "Không có", nhãn 0.0/1.0 → "?" ---
+                def clean_value(val, key=None):
+                    if key in ['NORM', 'MI', 'STTC', 'CD', 'HYP'] and (val == 0.0 or val == 1.0):
+                        return "?"
+                    elif pd.isna(val) or val == "unknown":
+                        return "Không rõ"
+                    elif val is None:
+                        return "Không có"
+                    else:
+                        return val
+
+                patient_info_cleaned = {k: clean_value(v, k) for k, v in patient_data.items()}
+
+                # --- Tạo JSON (không có nhãn thật) ---
+                json_data = {
+                    "ecg_id": selected_ecg_id,
+                    "patient_info": patient_info_cleaned,
+                    "predictions": {model: [f"{p:.2f}%" for p in vals] for model, vals in predictions.items()}
+                }
+
+                # --- Nút download JSON ---
+                st.download_button(
+                    label="📥 Xuất file JSON",
+                    data=json.dumps(json_data, indent=4, ensure_ascii=False),
+                    file_name=f"prediction_ecg_{selected_ecg_id}.json",
+                    mime="application/json"
+                )
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
-
-
-
-
-
-
-
-
-
-
-
-
