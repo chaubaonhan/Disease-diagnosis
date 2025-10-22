@@ -36,7 +36,7 @@ set_page_style()
 # Thiết lập tiêu đề cho ứng dụng
 st.title("🫀 Demo dự đoán bệnh tim")
 st.markdown("""
-Dự đoán nguy cơ mắc bệnh tim từ dữ liệu bệnh nhân với các mô hình Machine Learning đã được tối ưu hóa, huấn luyện trên bộ dữ liệu Cleveland.
+Dự đoán nguy cơ mắc bệnh tim từ dữ liệu bệnh nhân với các mô hình 1D đã được tối ưu hóa, huấn luyện trên bộ dữ liệu PhysioNet.
 *   **Bộ dữ liệu:** PTB-XL
 *   **Các mô hình:** 1D Convolution Neural Network
 """)
@@ -355,3 +355,4 @@ if predict_disease_button:
                 )
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
