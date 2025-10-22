@@ -13,25 +13,31 @@ Các mô hình 1D Convolution Neural Network đã được tối ưu hóa, huấ
 
 ## Cấu trúc thư mục
 
-```
-d:\Demo/
-├── app.py                 # Mã nguồn chính của ứng dụng Streamlit
-├── data.npz               # Dữ liệu đã xử lý (train/valid/test splits)
-├── README.md              # File hướng dẫn này
-├── requirements.txt       # Các thư viện Python cần thiết
-├── .venv/                 # Thư mục môi trường ảo
-├── database/              # Thư mục chứa dữ liệu gốc
-│   ├── ptbxl_database.csv # Dữ liệu thông tin bệnh nhân
-│   └── scp_statements.csv # Chú giải các mã SCP
-├── model/                 # Thư mục chứa các mô hình đã huấn luyện
-│   ├── model01.keras      # Mô hình 1 (dữ liệu dạng bảng)
-│   ├── model02.keras      # Mô hình 2 (dữ liệu dạng bảng + ECG đầy đủ)
-│   └── model03.keras      # Mô hình 3 (dữ liệu dạng bảng + 800 mẫu ECG)
-└── test/                  # Thư mục chứa dữ liệu mẫu để demo
-    ├── demo_ecg_76.npy    # Tín hiệu ECG mẫu cho bệnh nhân 76
-    └── demo_ecg_8733.npy  # Tín hiệu ECG mẫu cho bệnh nhân 8733
-```
-
+.devcontainer/
+    └── devcontainer.json
+database/
+    ├── data.npz
+    ├── merge.csv
+    ├── ptbxl_database.csv
+    └── scp_statements.csv
+experiment/
+    └── Heart_diagnosis.ipynb
+model/
+    ├── model01_architecture.png
+    ├── model01.keras
+    ├── model02_architecture.png
+    ├── model02.keras
+    ├── model03_architecture.png
+    └── model03.keras
+test/
+    ├── demo_ecg_76.npy
+    ├── demo_ecg_8733.npy
+    ├── prediction_ecg_76.json
+    └── prediction_ecg_8733.json
+.gitattributes
+app.py
+README.md
+requirements.txt
 ## Hướng dẫn Cài đặt và Chạy
 
 ### 1. Yêu cầu cài đặt
@@ -116,6 +122,7 @@ Cuối cùng là dự đoán của 3 mô hình
 
 ### 6. Thông tin về Database PTL-XB 
 https://drive.google.com/drive/folders/1RoHQ5ZOElYm378oMAqw7R-3PzroYV6qP?usp=sharing
+
 
 
 
