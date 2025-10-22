@@ -80,9 +80,9 @@ else:
 @st.cache_resource
 def load_keras_models():
     model_paths = {
-        "model01": r'D:\Demo\model\model01.keras',
-        "model02": r'D:\Demo\model\model02.keras',
-        "model03": r'D:\Demo\model\model03.keras'
+        "model01": r'model/model01.keras',
+        "model02": r'model/model02.keras',
+        "model03": r'model/model03.keras'
     }
     loaded_models = {}
     for name, path in model_paths.items():
@@ -355,6 +355,7 @@ if predict_disease_button:
                 )
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
 
