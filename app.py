@@ -123,7 +123,7 @@ def load_keras_models():
         if os.path.exists(path):
             try:
                 loaded_models[name] = tf.keras.models.load_model(path)
-                st.success(f"Đã tải {name} từ `{path}`.")
+                
             except Exception as e:
                 st.error(f"Lỗi khi tải {name} từ `{path}`: {e}")
         else:
@@ -397,6 +397,7 @@ if predict_disease_button:
                 )
             else:
                 st.warning("Không có dự đoán nào được tạo ra. Vui lòng kiểm tra các mô hình đã được tải.")
+
 
 
 
