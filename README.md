@@ -101,9 +101,12 @@ Dữ liệu về nhãn bệnh
 
 Hình ảnh về ECG của bệnh nhân 
 
-<img width="1249" height="292" alt="image" src="https://github.com/user-attachments/assets/ef372468-2c27-4644-8623-3682d0207711" />
+<img width="1362" height="596" alt="image" src="https://github.com/user-attachments/assets/6bd51b8c-c2ed-4f09-9198-7534b70476a2" />
+
 
 Có chức năng thể hiện số không nhất thiết phải vẽ 
+
+<img width="1343" height="461" alt="image" src="https://github.com/user-attachments/assets/fd7c6fc8-790a-41b8-bb23-d18316573337" />
 
 
 Cuối cùng là dự đoán của 3 mô hình 
@@ -113,6 +116,7 @@ Cuối cùng là dự đoán của 3 mô hình
 
 ### 6. Thông tin về Database PTL-XB 
 https://drive.google.com/drive/folders/1RoHQ5ZOElYm378oMAqw7R-3PzroYV6qP?usp=sharing
+
 
 
 
